@@ -1,25 +1,58 @@
 import math
 
 def make_translate( x, y, z ):
-    pass
-
+    ret = new_matrix()
+    ident(ret)
+    ret[3][0] = x
+    ret[3][1] = y
+    ret[3][2] = z
+    print_matrix(ret)
+    return ret
+    
 def make_scale( x, y, z ):
-    pass
-
-def make_rotX( theta ):    
-    pass
+    ret = new_matrix()
+    ident(ret)
+    ret[0][0] = x
+    ret[1][1] = y
+    ret[2][2] = z
+    print_matrix(ret)
+    return ret
+    
+def make_rotX( theta ):
+    ret = new_matrix()
+    ident(ret)
+    ret[1][1] = math.cos(theta)
+    ret[2][1] = math.sin(theta)
+    ret[1][2] = -1 * math.sin(theta)
+    ret[2][2] = math.cos(theta)
+    print_matrix(ret)
+    return ret
 
 def make_rotY( theta ):
-    pass
+    ret = new_matrix()
+    ident(ret)
+    ret[0][0] = math.cos(theta)
+    ret[0][2] = math.sin(theta)
+    ret[2][0] = -1 * math.sin(theta)
+    ret[2][2] = math.cos(theta)
+    print_matrix(ret)
+    return ret
 
 def make_rotZ( theta ):
-    pass
+    ret = new_matrix()
+    ident(ret)
+    ret[0][0] = math.cos(theta)
+    ret[0][1] = math.sin(theta)
+    ret[1][0] = -1 * math.sin(theta)
+    ret[1][1] = math.cos(theta)
+    print_matrix(ret)
+    return ret
 
 def print_matrix( matrix ):
     s = ''
     for r in range( len( matrix[0] ) ):
         for c in range( len(matrix) ):
-            s+= str(matrix[c][r]) + ' '
+            s+= str(matrix[c][r]) + '\t'
         s+= '\n'
     print s
 
