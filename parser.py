@@ -32,4 +32,62 @@ The file follows the following format:
 See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
+    f = open(fname, "r")
+    line = f.readline()
+    scr = new_screen()
+    color = [0,255,0]
     
+    while (line != ""):
+        command = line
+        args = f.readline().split(" ")
+
+        if (command == "line"):
+            add_edge(points, args[0], args[1], args[2], args[3], args[4], args[5])
+            print "line added"
+
+        if (command == "display"):
+            clear_screen(scr)
+            draw_lines(points, scr, color)
+            display(scr)
+            print "displaying"
+
+        if (command == "ident"):
+            ident(transform)
+            print "reset transformation matrix"
+
+        if (command == "scale"):
+            temp = make_scale(args[0], args[1], args[2])
+            matrix_mult(temp, transform)
+            print "scaling"
+
+        if (command == "rotate"): 
+            
+            if (args[0] == "x"):
+                temp = make_rotX(args[1])
+
+            if (args[0] == "y"):
+                temp = make_rotY(args[1])
+
+            if (args[0] == "z"):
+                temp = make_rotZ(args[1])
+
+            matrix_mult(temp, transform)
+            print "rotating"
+
+        if (command == "move"):
+            temp = make_translate(args[0], args[1], args[2])
+            matrix_mult(temp, transform)
+            print "translating"
+
+        if (command == "apply"):
+            matrix_mult(transform, points)
+            print "applying transformation matrix"
+
+        if (command == "save"):
+            clear_screen(scr)
+            draw_lines(points, scr, color)
+            save_extension(scr, args[0])
+            print "saving"
+
+        line = f.readline()
+        
