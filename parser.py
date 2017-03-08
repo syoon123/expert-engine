@@ -86,6 +86,7 @@ def parse_file( fname, points, transform, screen, color ):
             print "applying transformation matrix"
 
         if (command == "save"):
+            args = f.readline().strip("\n").split(" ")
             clear_screen(scr)
             draw_lines(points, scr, color)
             save_extension(scr, args[0])
