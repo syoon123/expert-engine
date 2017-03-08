@@ -63,6 +63,7 @@ def ident( matrix ):
                 matrix[c][r] = 1
             else:
                 matrix[c][r] = 0
+    print_matrix(matrix)
 
 def scalar_mult( matrix, s ):
     for r in range( len( matrix[0] ) ):

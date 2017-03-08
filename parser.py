@@ -38,10 +38,10 @@ def parse_file( fname, points, transform, screen, color ):
     color = [0,255,0]
     
     while (line != ""):
-        command = line.strip("\n")
-        args = f.readline().strip("\n").split(" ")
+        command = line.strip("\n")        
 
         if (command == "line"):
+            args = f.readline().strip("\n").split(" ")
             add_edge(points, int(args[0]), int(args[1]), int(args[2]), int(args[3]), int(args[4]), int(args[5]))
             print "line added"
 
@@ -56,12 +56,13 @@ def parse_file( fname, points, transform, screen, color ):
             print "reset transformation matrix"
 
         if (command == "scale"):
+            args = f.readline().strip("\n").split(" ")
             temp = make_scale(int(args[0]), int(args[1]), int(args[2]))
             matrix_mult(temp, transform)
             print "scaling"
 
         if (command == "rotate"): 
-            
+            args = f.readline().strip("\n").split(" ")
             if (args[0] == "x"):
                 temp = make_rotX(int(args[1]))
 
@@ -75,6 +76,7 @@ def parse_file( fname, points, transform, screen, color ):
             print "rotating"
 
         if (command == "move"):
+            args = f.readline().strip("\n").split(" ")
             temp = make_translate(int(args[0]), int(args[1]), int(args[2]))
             matrix_mult(temp, transform)
             print "translating"
